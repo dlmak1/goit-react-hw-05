@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import useTmdbApi from "../../hooks/useTmdbApi";
+import MovieList from "../../components/MovieList/MovieList";
+import { Toaster } from "react-hot-toast";
 
 import css from "./HomePage.module.css";
 
 const HomePage = () => {
-  const { fetchTrendingMovies, errorMessage } = useTmdbApi();
+  const { fetchTrendingMovies } = useTmdbApi();
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -14,7 +16,7 @@ const HomePage = () => {
   return (
     <div>
       <div className={css.aboutText}>
-        <h1>Search movies</h1>
+        <h1>Trending movies</h1>
         <p>
           We provided you some new films of the day, presented by{" "}
           <a className="default-link" href="https://www.themoviedb.org">
@@ -23,17 +25,8 @@ const HomePage = () => {
         </p>
         <p>Here are films that you might not have seen!</p>
       </div>
-
-      <div>
-        <p className={css.header}>Trending Movies: </p>
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>{movie.title}</li>
-          ))}
-        </ul>
-      </div>
-
-      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+      <MovieList movies={movies} listName="Trending movies:" />
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

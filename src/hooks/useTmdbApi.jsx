@@ -17,43 +17,42 @@ const useTmdbApi = () => {
     }
   }, []);
 
-  const fetchMovieById = useCallback(async (id, setData) => {
+  const fetchMovieById = useCallback(async (id) => {
     try {
       const data = await tmdbApiInstance.fetchMovieById(id);
-      setData(data);
-      setErrorMessage(null);
+      return data;
     } catch (error) {
       setErrorMessage(error.message);
+      throw error;
     }
   }, []);
 
-  const fetchCast = useCallback(async (id, setData) => {
+  const fetchCast = useCallback(async (id) => {
     try {
       const data = await tmdbApiInstance.fetchCast(id);
-      setData(data);
-      setErrorMessage(null);
+      return data;
     } catch (error) {
       setErrorMessage(error.message);
     }
   }, []);
 
-  const fetchReviews = useCallback(async (id, setData) => {
+  const fetchReviews = useCallback(async (id) => {
     try {
       const data = await tmdbApiInstance.fetchReviews(id);
-      setData(data);
-      setErrorMessage(null);
+      return data;
     } catch (error) {
       setErrorMessage(error.message);
     }
   }, []);
 
-  const fetchMovieByQuery = useCallback(async (query, setData) => {
+  const fetchMovieByQuery = useCallback(async (query) => {
     try {
       const data = await tmdbApiInstance.fetchMovieByQuery(query);
-      setData(data);
       setErrorMessage(null);
+      return data;
     } catch (error) {
       setErrorMessage(error.message);
+      throw error;
     }
   }, []);
 
